@@ -1,43 +1,81 @@
 # Get-CopilotAgentUsage.ps1
 
-Read-only report of Microsoft 365 Copilot usage per user, plus every agent in the tenant with its owner and 30-day usage. PowerShell 7, Microsoft Graph PowerShell (`Microsoft.Graph.Authentication` only). Runs on Windows and macOS.
+Export Microsoft 365 Copilot usage per user and, when the required tenant licensing and permissions are available, a catalogue of agents with owner and usage information.
 
-## Run it
+The script is read-only and writes CSV reports to the selected output folder.
+
+## What it exports
+
+- **Copilot user usage:** One row per user included in the Microsoft 365 Copilot usage report.
+- **Agent catalogue:** One row per agent returned by the organisation's agent catalogue, including available owner and 30-day usage information.
+
+The script creates date-stamped files:
+
+- `CopilotUserUsage-<date>.csv`
+- `CopilotAgents-<date>.csv`
+
+The agent report may be skipped with a warning if the required Microsoft Agent 365 licensing or access is unavailable.
+
+## Requirements
+
+- PowerShell 7.2 or later
+- `Microsoft.Graph.Authentication` PowerShell module
+- An account with the appropriate Microsoft Graph permissions and administrative role
+- Required tenant licensing for the agent catalogue report
+
+Install the module if needed:
 
 ```powershell
-Install-Module Microsoft.Graph.Authentication -Scope CurrentUser   # once
-./Get-CopilotAgentUsage.ps1                      # last 28 days, CSVs in the current folder
+Install-Module Microsoft.Graph.Authentication -Scope CurrentUser
+```
+
+## Permissions and access
+
+The script requests the following delegated Microsoft Graph scopes, with admin consent required as described in the script:
+
+- `Reports.Read.All`
+- `CopilotPackages.Read.All`
+- `AgentIdentity.Read.All`
+- `User.ReadBasic.All`
+
+The script documentation identifies **AI Administrator** or **Global Administrator** as the role for the signing-in account. Exact permission and licensing requirements can change, so verify them against current Microsoft documentation and your tenant configuration before running the script.
+
+## Usage
+
+Run the script from the folder where you saved it:
+
+```powershell
+./Get-CopilotAgentUsage.ps1
+```
+
+Choose a reporting period of 7, 28, 90, or 180 days and specify an output folder:
+
+```powershell
 ./Get-CopilotAgentUsage.ps1 -Days 90 -OutputFolder ~/Reports
 ```
 
-To sign in with a device code (approve from another machine), run `Connect-MgGraph -Scopes Reports.Read.All,CopilotPackages.Read.All,AgentIdentity.Read.All,User.ReadBasic.All -UseDeviceCode` first. The script reuses that session.
+`-Days` defaults to `28`. `-OutputFolder` defaults to the current directory.
 
-## Permissions
+## Important notes
 
-| What | Needed for |
-|---|---|
-| `Reports.Read.All` (delegated) | Copilot usage per user |
-| `CopilotPackages.Read.All` (delegated) | Agent list and per-agent usage |
-| `AgentIdentity.Read.All` (delegated) | Owners from Microsoft Entra Agent ID |
-| `User.ReadBasic.All` (delegated) | Owner name and email |
-| Role: **AI Administrator** (or Global Administrator) | Covers both reports |
-| Licence: **Microsoft Agent 365** in the tenant | Agent list. Without it the agent part is skipped with a warning |
+- The script is intended to read data and export reports. Review the code before running it in your environment.
+- The contents of the reports depend on the data Microsoft Graph makes available to your tenant and the permissions granted to the account.
+- Treat exported CSV files as potentially sensitive organisational data. Store and share them according to your organisation's policies.
+- Test in a suitable non-production or controlled environment before using the reports for operational decisions.
 
-All four scopes need admin consent once. If user names show as long hex strings, the report privacy setting is on: a Global Administrator opens **Settings** > **Org settings** > **Services** > **Reports** and clears **Conceal user, group, and site names in all reports** (older wording: tick **Display concealed user, group, and site names in all reports**).
+## Author
 
-## Output
+**Adnan Amin** is a Microsoft MVP since 2015 and a Microsoft technology consultant with over 20 years of experience. His areas of expertise include Microsoft 365, SharePoint, Microsoft Teams, Power Platform, Microsoft Copilot, and AI agents.
 
-**CopilotUserUsage-&lt;date&gt;.csv** (one row per Copilot-licensed user, from `GET /v1.0/copilot/reports/getMicrosoft365CopilotUsageUserDetail(period='D28',version='v2')`, falls back to report v1 / D30 if v2 is refused):
-reportRefreshDate, userPrincipalName, displayName, lastActivityDate, and a LastActivityDate column per app (Copilot Chat, Teams, Word, Excel, PowerPoint, Outlook, OneNote, Loop), then whatever the per-period block returns (reportPeriod and, in report v2, prompt counts and active days). Column names come straight from Graph, so new metrics appear without a script change.
+Through [MSTechTalk](https://mstechtalk.com), Adnan shares technical articles, practical guidance, and tools to help IT professionals and administrators learn, implement, and manage Microsoft technologies.
 
-**CopilotAgents-&lt;date&gt;.csv** (one row per agent or bot in the organisation catalog, from `GET /beta/copilot/admin/catalog/packages` and `/packages/{id}`):
-AgentName, Type, Platform, Publisher, OwnerName, OwnerEmail, OwnerSource, ActiveUsers30d, Sessions30d, RunTimeHours30d, ExceptionRate, LastUsed, IsBlocked, AvailableTo, DeployedTo, SharedWithCount, AgentKind, ElementTypes, SupportedHosts, Sensitivity, Created, LastModified, Version, Description, AgentId, AgentIdentityId, AppId.
+- **Blog:** https://mstechtalk.com
+- **GitHub:** https://github.com/adnanamin
 
-Plus a console summary: users in report, users active in the period, agents, agents with no owner, unused agents, blocked agents.
+## Disclaimer
 
-## Known limits
+This script is provided for educational and administrative purposes. Review the code, verify the required permissions, and test it in a suitable environment before production use. Use it at your own risk.
 
-- **Owner**: Graph has no documented owner property on agent packages yet. The script reads `ownerId` (returned by the beta API, used in the documented reassign flow) and falls back to the agent's Entra Agent ID owners. Anything else shows "No owner found".
-- Agent usage numbers are Microsoft's 30-day figures from the package details, regardless of `-Days`.
-- Copilot Chat (unlicensed) usage isn't in the Graph report yet. Use the admin center Copilot Chat report or the Purview audit log.
-- Usage data lags up to 48 hours.
+## Related article
+
+Add the URL of the MSTechTalk article associated with this script here before publishing, so readers can find the accompanying explanation and context.
