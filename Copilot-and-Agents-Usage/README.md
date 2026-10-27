@@ -62,6 +62,7 @@ Choose a reporting period of 7, 28, 90, or 180 days and specify an output folder
 - The contents of the reports depend on the data Microsoft Graph makes available to your tenant and the permissions granted to the account.
 - Treat exported CSV files as potentially sensitive organisational data. Store and share them according to your organisation's policies.
 - Test in a suitable non-production or controlled environment before using the reports for operational decisions.
+- Check blog post https://mstechtalk.com/how-to-monitor-microsoft-365-copilot-and-agents-usage-in-your-organization/ for more detrails on details related to Copilot Usage reports.
 
 ## Author
 
