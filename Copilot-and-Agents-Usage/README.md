@@ -78,5 +78,6 @@ This script is provided for educational and administrative purposes. Review the 
 
 ## Related article
 
-[Roles and permissions to monitor Copilot and agents in Microsoft 365](https://mstechtalk.com/how-to-monitor-microsoft-365-copilot-and-agents-usage-in-your-organization/).
+[How to monitor Microsoft 365 Copilot and agents usage in your organization](https://mstechtalk.com/how-to-monitor-microsoft-365-copilot-and-agents-usage-in-your-organization/)
+[Roles and permissions to monitor Copilot and agents in Microsoft 365](https://mstechtalk.com/roles-and-permissions-to-monitor-copilot-and-agents-in-microsoft-365/)
 
