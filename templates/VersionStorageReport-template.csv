@@ -1,9 +1,0 @@
-WebId.Compact,DocId.Compact,MajorVersion,MinorVersion,WebUrl.Compact,FileUrl.Compact,Size,ModifiedBy_UserId.Compact,ModifiedBy_DisplayName.Compact,LastModifiedDate,SnapshotDate,IsSnapshotDateEstimated,CurrentExpirationDate,AutomaticPolicyExpirationDate,TargetExpirationDate
-4c7a58c1-01f2-4fa3-a730-44081a44f689,18c3e09c-b5be-48e7-a754-7a2ce53e0999,1,0,https://contoso.sharepoint.com/sites/Projects,https://contoso.sharepoint.com/sites/Projects/Shared Documents/Budget/Budget-2026.xlsx,92246,6,Sample User A,2025-03-13T22:36:09.0000000Z,2025-03-20T16:56:51.0000000Z,False,,,
-,,2,0,,,95120,,,2025-06-02T09:14:41.0000000Z,2025-06-02T09:20:03.0000000Z,False,,,
-,,3,0,,,101877,11,Sample User B,2025-11-18T14:02:10.0000000Z,2025-11-18T14:05:55.0000000Z,False,,,
-,,4,0,,,104390,,,2026-10-28T08:47:30.0000000Z,2026-10-28T08:50:12.0000000Z,False,,,
-,5b2f7d41-9a1c-4e8b-8f2d-3c6e1a7b9d20,1,0,,https://contoso.sharepoint.com/sites/Projects/Shared Documents/Sales/Pitch-deck.pptx,41943040,6,Sample User A,2024-09-05T11:20:00.0000000Z,2024-09-05T11:25:00.0000000Z,True,,,
-,,1,1,,,42205184,,,2024-09-06T10:02:00.0000000Z,2024-09-06T10:07:00.0000000Z,False,,,
-,,2,0,,,42467328,,,2025-01-15T16:40:00.0000000Z,2025-01-15T16:45:00.0000000Z,False,,,
-,,3,0,,,43515904,11,Sample User B,2026-09-30T07:55:00.0000000Z,2026-09-30T08:00:00.0000000Z,False,,,
