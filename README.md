@@ -15,6 +15,15 @@ Tools for reporting on Microsoft 365 Copilot usage and discovering agents in you
 - **Requirements:** PowerShell 7.2 or later and the required Microsoft Graph permissions.
 - **Documentation:** [Copilot and Agents Usage](./Copilot-and-Agents-Usage/README.md)
 
+### SharePoint Site and Tenant Storage
+
+Tools for finding what is filling a SharePoint site, measuring version history storage and trimming old versions.
+
+- **Scripts:** `Get-TopSitesByStorage.ps1`, `Start-VersionStorageReport.ps1`, `Measure-VersionStorageReport.ps1`, `Invoke-VersionTrim.ps1`
+- **Features:** Top sites by storage, version storage report jobs, version history analysis per file, library and user, what-if estimates, version limits and trim jobs.
+- **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role. `Measure-VersionStorageReport.ps1` needs no module.
+- **Documentation:** [SharePoint Site and Tenant Storage](./SharePoint-Site-and-Tenant-Storage/README.md)
+
 ## Getting Started
 
 1. Open the folder for the script you want to use.
