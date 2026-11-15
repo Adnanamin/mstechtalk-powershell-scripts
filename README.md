@@ -15,6 +15,15 @@ Tools for reporting on Microsoft 365 Copilot usage and discovering agents in you
 - **Requirements:** PowerShell 7.2 or later and the required Microsoft Graph permissions.
 - **Documentation:** [Copilot and Agents Usage](./Copilot-and-Agents-Usage/README.md)
 
+### SharePoint Sites with Copilot Blocked
+
+Tools for listing the SharePoint sites where Copilot is blocked by Restricted Content Discovery (RCD).
+
+- **Scripts:** `Get-CopilotBlockedSites.ps1`, `Get-RCDInsightsReport.ps1`
+- **Features:** Per-site RCD check exported to CSV, and Microsoft's RCD insights report queued, polled and downloaded.
+- **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role.
+- **Documentation:** [SharePoint Sites with Copilot Blocked](./SharePoint-Copilot-Blocked-Sites/README.md)
+
 ### SharePoint Site and Tenant Storage
 
 Tools for finding what is filling a SharePoint site, measuring version history storage and trimming old versions.
