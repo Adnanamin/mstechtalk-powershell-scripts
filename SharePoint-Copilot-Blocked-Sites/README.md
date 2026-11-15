@@ -35,6 +35,8 @@ Install-Module Microsoft.Online.SharePoint.PowerShell -Scope CurrentUser
 
 `Get-RCDInsightsReport.ps1` asks you to confirm before it queues the report: answer **Y**. The status goes NotStarted, InQueue, Completed. On a small demo tenant it took about two minutes.
 
+Microsoft allows one new RCD report every 24 hours. A second start in that window fails with "new report can be generated once in every 24 hours", so the script downloads the latest existing report instead.
+
 ## Important notes
 
 - One `Get-SPOSite` call per site makes `Get-CopilotBlockedSites.ps1` slow on a big tenant.
