@@ -28,8 +28,7 @@
     Article     : https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/
     GitHub      : https://github.com/adnanamin/mstechtalk-powershell-scripts
     Permissions : SharePoint Administrator
-    Tested      : Same commands run on 15 November 2026 (Windows PowerShell 5.1, demo tenant).
-                  This parameter version has not been run yet.
+    Tested      : 15 November 2026, Windows PowerShell 5.1, on a demo tenant
     Disclaimer  : Provided as-is. Review the code and test in a suitable
                   environment before using it in production.
 #>
