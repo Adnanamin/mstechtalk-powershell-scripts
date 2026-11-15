@@ -33,6 +33,51 @@ Tools for finding what is filling a SharePoint site, measuring version history s
 - **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role. `Measure-VersionStorageReport.ps1` needs no module.
 - **Documentation:** [SharePoint Site and Tenant Storage](./SharePoint-Site-and-Tenant-Storage/README.md)
 
+### Anyone Links on a SharePoint Site
+
+Tools for finding every Anyone (anonymous) sharing link on a SharePoint site.
+
+- **Script:** `Get-AnyoneSharingLink.ps1`
+- **Features:** Every file and folder an Anyone link opens, with view or edit and the expiry date, exported to CSV.
+- **Requirements:** PowerShell 7.4 or later, PnP.PowerShell 3.x and your own Entra app registration.
+- **Documentation:** [Anyone Links on a SharePoint Site](./SharePoint-Anyone-Sharing-Links/README.md)
+
+### SharePoint Unique Permissions
+
+Tools for listing everything on a SharePoint site that has stopped inheriting permissions.
+
+- **Script:** `Get-UniquePermissionReport.ps1`
+- **Features:** Libraries, lists, folders, files and list items with unique permissions, exported to CSV with a count per list and level.
+- **Requirements:** PowerShell 7.4 or later, PnP.PowerShell 3.x and your own Entra app registration.
+- **Documentation:** [SharePoint Unique Permissions](./SharePoint-Unique-Permissions/README.md)
+
+### SharePoint Large Lists
+
+Tools for reading SharePoint lists over the 5,000-item list view threshold.
+
+- **Script:** `Get-LargeListItem.ps1`
+- **Features:** Paged reads of every item, and CAML queries on an indexed column.
+- **Requirements:** PowerShell 7.4 or later, PnP.PowerShell 3.x and your own Entra app registration.
+- **Documentation:** [SharePoint Large Lists](./SharePoint-Large-Lists/README.md)
+
+### Microsoft Graph sharedWithMe Retirement
+
+Tools for moving off the Graph file endpoints that stop returning data after November 2026.
+
+- **Scripts:** `Find-DeprecatedGraphEndpoint.ps1`, `Get-RecentDocumentBySearch.ps1`
+- **Features:** Finds old calls in your scripts, and lists recent documents with the Microsoft Search API.
+- **Requirements:** Microsoft.Graph.Authentication for the Search API script.
+- **Documentation:** [Microsoft Graph sharedWithMe Retirement](./Graph-SharedWithMe-Retirement/README.md)
+
+### SharePoint OTP Retirement
+
+Tools for giving external users access back after SharePoint one-time passcode retirement.
+
+- **Script:** `New-GuestInvitation.ps1`
+- **Features:** Creates the Entra B2B guest account an external user needs to open old specific people links.
+- **Requirements:** Microsoft.Graph.Identity.SignIns and the `User.Invite.All` permission.
+- **Documentation:** [SharePoint OTP Retirement](./SharePoint-OTP-Retirement/README.md)
+
 ## Getting Started
 
 1. Open the folder for the script you want to use.
