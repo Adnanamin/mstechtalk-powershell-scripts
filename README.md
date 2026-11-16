@@ -4,6 +4,33 @@ A collection of practical PowerShell scripts published alongside technical artic
 
 These scripts help IT professionals, Microsoft 365 administrators, consultants, and technology teams automate administrative tasks, generate reports, and better understand their Microsoft environments.
 
+## Script Catalogue
+
+| Script | Folder | Level | Requires | Blog post |
+|---|---|---|---|---|
+| `Get-CopilotAgentUsage.ps1` | [Copilot-and-Agents-Usage](./Copilot-and-Agents-Usage/) | Tenant, User | Graph | [Monitor Copilot and agents usage](https://mstechtalk.com/how-to-monitor-microsoft-365-copilot-and-agents-usage-in-your-organization/) |
+| `Get-CopilotBlockedSites.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
+| `Get-RCDInsightsReport.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
+| `Get-TopSitesByStorage.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Tenant | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
+| `Start-VersionStorageReport.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
+| `Measure-VersionStorageReport.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site | None | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
+| `Invoke-VersionTrim.ps1` *(changes data)* | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
+| `Get-AnyoneSharingLink.ps1` | [SharePoint-Anyone-Sharing-Links](./SharePoint-Anyone-Sharing-Links/) | Site, Library | PnP | [Find Anyone links with PnP PowerShell](https://mstechtalk.com/find-anyone-links-sharepoint-pnp-powershell/) |
+| `Get-UniquePermissionReport.ps1` | [SharePoint-Unique-Permissions](./SharePoint-Unique-Permissions/) | Site, Library | PnP | [SharePoint unique permissions report](https://mstechtalk.com/sharepoint-unique-permissions-report-pnp-powershell/) |
+| `Get-LargeListItem.ps1` | [SharePoint-Large-Lists](./SharePoint-Large-Lists/) | List | PnP | [Fix the 5,000-item list view threshold](https://mstechtalk.com/sharepoint-list-view-threshold-5000-fix/) |
+| `Find-DeprecatedGraphEndpoint.ps1` | [Graph-SharedWithMe-Retirement](./Graph-SharedWithMe-Retirement/) | Local script files | None | [Graph sharedWithMe retirement](https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/) |
+| `Get-RecentDocumentBySearch.ps1` | [Graph-SharedWithMe-Retirement](./Graph-SharedWithMe-Retirement/) | User | Graph | [Graph sharedWithMe retirement](https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/) |
+| `New-GuestInvitation.ps1` *(changes data)* | [SharePoint-OTP-Retirement](./SharePoint-OTP-Retirement/) | User | Graph | [SharePoint OTP retirement: guest access denied](https://mstechtalk.com/sharepoint-otp-retirement-guest-access-denied/) |
+
+**Level** is what a script reports on. **Requires** is the sign-in it needs:
+
+- **PnP:** PnP.PowerShell 3.x with your own Entra app registration.
+- **Graph:** Microsoft Graph PowerShell.
+- **SPO:** SharePoint Online Management Shell.
+- **None:** no sign-in.
+
+Scripts marked *(changes data)* create or change something in your tenant; read their README before running them. [CONVENTIONS.md](./CONVENTIONS.md) describes how scripts in this repository are written.
+
 ## Script Collections
 
 ### Microsoft Copilot and AI Agents
