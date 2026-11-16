@@ -115,4 +115,4 @@ These scripts are provided as-is, without warranties. Review the code and test i
 
 ## Related article
 
-- [Microsoft Graph sharedWithMe and recent stop returning data this month](https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/)
+- Microsoft Graph sharedWithMe and recent stop returning data this month (coming soon)

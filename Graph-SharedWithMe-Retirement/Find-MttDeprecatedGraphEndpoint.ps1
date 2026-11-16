@@ -46,7 +46,7 @@ function Find-MttDeprecatedGraphEndpoint {
         Tested:      16 November 2026 in PowerShell 7.6.9 and Windows PowerShell 5.1: same lines as
                      Find-DeprecatedGraphEndpoint.ps1 on sample files and on a 41-file folder
     .LINK
-        https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/
+        [POST URL]
     #>
     [CmdletBinding()]
     [OutputType('MSTechTalk.DeprecatedGraphEndpoint')]

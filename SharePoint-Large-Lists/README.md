@@ -95,4 +95,4 @@ These scripts are provided as-is, without warranties. Review the code and test i
 
 ## Related article
 
-- [Fix: the number of items in this list exceeds the list view threshold](https://mstechtalk.com/sharepoint-list-view-threshold-5000-fix/)
+- Fix: the number of items in this list exceeds the list view threshold (coming soon)
