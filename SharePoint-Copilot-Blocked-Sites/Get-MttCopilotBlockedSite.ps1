@@ -10,7 +10,7 @@ function Get-MttCopilotBlockedSite {
         in the tenant is checked.
 
         Each site is read by URL, because Get-SPOSite -Limit All doesn't fill in this property. That's one call
-        per site, so a big tenant takes a while: Microsoft's RCD insights report (Get-RCDInsightsReport.ps1 in
+        per site, so a big tenant takes a while: Microsoft's RCD insights report (Start-MttRcdInsightsReport in
         the same folder) is faster there.
 
         The function is read-only. It doesn't connect and doesn't export: sign in with Connect-SPOService first,

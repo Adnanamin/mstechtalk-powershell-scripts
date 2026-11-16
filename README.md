@@ -10,7 +10,7 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 |---|---|---|---|---|
 | `Get-CopilotAgentUsage.ps1` | [Copilot-and-Agents-Usage](./Copilot-and-Agents-Usage/) | Tenant, User | Graph | [Monitor Copilot and agents usage](https://mstechtalk.com/how-to-monitor-microsoft-365-copilot-and-agents-usage-in-your-organization/) |
 | `Get-MttCopilotBlockedSite.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant, Site | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
-| `Get-RCDInsightsReport.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
+| `Start-MttRcdInsightsReport.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
 | `Get-TopSitesByStorage.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Tenant | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Start-VersionStorageReport.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Measure-VersionStorageReport.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site | None | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
@@ -46,8 +46,8 @@ Tools for reporting on Microsoft 365 Copilot usage and discovering agents in you
 
 Tools for listing the SharePoint sites where Copilot is blocked by Restricted Content Discovery (RCD).
 
-- **Scripts:** `Get-MttCopilotBlockedSite.ps1` (module-ready function; replaces `Get-CopilotBlockedSites.ps1`), `Get-RCDInsightsReport.ps1`
-- **Features:** Per-site RCD check for the whole tenant or the sites you give it, returned as objects you can export to CSV, and Microsoft's RCD insights report queued, polled and downloaded.
+- **Scripts:** `Get-MttCopilotBlockedSite.ps1` and `Start-MttRcdInsightsReport.ps1` (module-ready functions; replace `Get-CopilotBlockedSites.ps1` and `Get-RCDInsightsReport.ps1`)
+- **Features:** Per-site RCD check for the whole tenant or the sites you give it, and Microsoft's RCD insights report queued, waited for and downloaded, both returned as objects you can export to CSV.
 - **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role.
 - **Documentation:** [SharePoint Sites with Copilot Blocked](./SharePoint-Copilot-Blocked-Sites/README.md)
 
