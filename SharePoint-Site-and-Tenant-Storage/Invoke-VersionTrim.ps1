@@ -4,7 +4,7 @@
 
 .DESCRIPTION
     WARNING: versions deleted by a trim job are deleted permanently. They do NOT go to the recycle bin.
-    Run Start-VersionStorageReport.ps1 and Measure-MttVersionStorage first, and agree the limit
+    Run Start-MttVersionStorageReport and Measure-MttVersionStorage first, and agree the limit
     with the site owner. Files under a retention policy or label keep their versions whatever you set.
 
     Changing a limit only affects versions created from now on. The trim job is what removes the

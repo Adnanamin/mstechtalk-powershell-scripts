@@ -13,7 +13,8 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 | `Get-MttCopilotBlockedSite.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant, Site | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
 | `Start-MttRcdInsightsReport.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
 | `Get-MttSiteStorage.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Tenant, Site | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
-| `Start-VersionStorageReport.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
+| `Start-MttVersionStorageReport.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
+| `Get-MttVersionStorageReportStatus.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Measure-MttVersionStorage.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library, File | None | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Invoke-VersionTrim.ps1` *(changes data)* | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Get-MttAnyoneSharingLink.ps1` | [SharePoint-Anyone-Sharing-Links](./SharePoint-Anyone-Sharing-Links/) | Site, Library | PnP | [Find Anyone links with PnP PowerShell](https://mstechtalk.com/find-anyone-links-sharepoint-pnp-powershell/) |
@@ -56,7 +57,7 @@ Tools for listing the SharePoint sites where Copilot is blocked by Restricted Co
 
 Tools for finding what is filling a SharePoint site, measuring version history storage and trimming old versions.
 
-- **Scripts:** `Get-MttSiteStorage.ps1` (module-ready function; replaces `Get-TopSitesByStorage.ps1`), `Start-VersionStorageReport.ps1`, `Measure-MttVersionStorage.ps1` (module-ready function; replaces `Measure-VersionStorageReport.ps1`), `Invoke-VersionTrim.ps1`
+- **Scripts:** `Get-MttSiteStorage.ps1` (module-ready function; replaces `Get-TopSitesByStorage.ps1`), `Start-MttVersionStorageReport.ps1` and `Get-MttVersionStorageReportStatus.ps1` (module-ready functions; replace `Start-VersionStorageReport.ps1`), `Measure-MttVersionStorage.ps1` (module-ready function; replaces `Measure-VersionStorageReport.ps1`), `Invoke-VersionTrim.ps1`
 - **Features:** Top sites by storage, version storage report jobs, version history analysis per file, library and user, what-if estimates, version limits and trim jobs.
 - **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role. `Measure-MttVersionStorage.ps1` needs no module.
 - **Documentation:** [SharePoint Site and Tenant Storage](./SharePoint-Site-and-Tenant-Storage/README.md)

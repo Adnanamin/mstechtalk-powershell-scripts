@@ -2,12 +2,13 @@
 
 Scripts and functions for the MSTechTalk post [How to find what is filling a SharePoint site and free up tenant storage](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) by Adnan Amin.
 
-Three of them use the **SharePoint Online Management Shell** (`Microsoft.Online.SharePoint.PowerShell`). `Measure-MttVersionStorage.ps1` only reads a CSV on your machine and needs no module.
+Four of them use the **SharePoint Online Management Shell** (`Microsoft.Online.SharePoint.PowerShell`). `Measure-MttVersionStorage.ps1` only reads a CSV on your machine and needs no module.
 
 | Script | What it does | Changes anything? |
 |---|---|---|
 | `Get-MttSiteStorage.ps1` | Report function: lists sites by the storage they use, largest first, with last change date | No |
-| `Start-VersionStorageReport.ps1` | Starts Microsoft's version storage report job for a site, OneDrive or library, or checks its progress | Creates the report CSV only |
+| `Start-MttVersionStorageReport.ps1` | Function: starts Microsoft's version storage report job for a site, OneDrive or library | Creates the report CSV only |
+| `Get-MttVersionStorageReportStatus.ps1` | Report function: shows the status of that job | No |
 | `Measure-MttVersionStorage.ps1` | Report function: reads the finished report and returns version history size per file, or the totals, and what a trim would free | No |
 | `Invoke-VersionTrim.ps1` | Sets version history limits and queues a trim job for the versions already there | **Yes. Deleted versions can't be recovered** |
 
@@ -56,24 +57,43 @@ On the demo tenant it read 72 sites in a second or two, in PowerShell 7 and 5.1,
 
 ### 2. Start the version storage report on one of them
 
+`Start-MttVersionStorageReport` and `Get-MttVersionStorageReportStatus` are functions for the planned **MSTechTalk.M365** module. Together they replace `Start-VersionStorageReport.ps1`: they don't sign in, and checking progress is its own function instead of a `-CheckProgress` switch.
+
 ```powershell
-.\Start-VersionStorageReport.ps1 -AdminUrl https://contoso-admin.sharepoint.com `
-    -SiteUrl https://contoso.sharepoint.com/sites/Projects `
+Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
+Connect-SPOService -Url https://contoso-admin.sharepoint.com
+. .\Start-MttVersionStorageReport.ps1
+. .\Get-MttVersionStorageReportStatus.ps1
+$job = Start-MttVersionStorageReport -SiteUrl https://contoso.sharepoint.com/sites/Projects `
     -ReportUrl "https://contoso.sharepoint.com/sites/Projects/Shared Documents/Reports/VersionReport.csv"
 ```
 
 - The CSV must go in a document library of the same site, and the file must not exist yet.
 - Put it in a folder only site owners can open. The report lists every file and who edited it.
 - Add `-Library "Documents"` for one library.
-- The job runs in the background: over 24 hours for a small site, a few days for a large one. Don't open or edit the CSV while it fills. Deleting it cancels the job.
+- The job runs in the background. Microsoft says over 24 hours for a small site and a few days for a large one; a small demo site finished the same evening. Don't open or edit the CSV while it fills. Deleting it cancels the job.
 
-Check progress until the status is `completed`:
+Check progress until the status is `completed`, in the same session or a new one:
 
 ```powershell
-.\Start-VersionStorageReport.ps1 -AdminUrl https://contoso-admin.sharepoint.com `
-    -SiteUrl https://contoso.sharepoint.com/sites/Projects `
-    -ReportUrl "https://contoso.sharepoint.com/sites/Projects/Shared Documents/Reports/VersionReport.csv" -CheckProgress
+$job | Get-MttVersionStorageReportStatus
+Get-MttVersionStorageReportStatus -SiteUrl https://contoso.sharepoint.com/sites/Projects `
+    -ReportUrl "https://contoso.sharepoint.com/sites/Projects/Shared Documents/Reports/VersionReport.csv"
 ```
+
+| Parameter | Description |
+|---|---|
+| `-SiteUrl` | Site or OneDrive URL (alias `Url`). |
+| `-ReportUrl` | Full URL of the report CSV, in a library of the same site. |
+| `-Library` | Title of one library. Leave it out for the whole site. |
+
+Both return one `MSTechTalk.VersionStorageReportStatus` object: `SiteUrl`, `Library`, `ReportUrl`, `Status` (`completed`, `in_progress`, `no_report_found` or `failed`) and `ErrorMessage`. SharePoint looks the job up by report URL, so use the same `-ReportUrl` you started it with.
+
+| | |
+|---|---|
+| **Requires** | SPO |
+| **Level** | Site, Library |
+| **Permissions** | SharePoint Administrator |
 
 ### 3. Analyse the report
 

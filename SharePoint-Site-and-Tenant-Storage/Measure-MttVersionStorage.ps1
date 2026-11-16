@@ -58,7 +58,7 @@ function Measure-MttVersionStorage {
     .NOTES
         Author:      Adnan Amin (MSTechTalk.com)
         Module:      None
-        Requires:    None (reads a CSV you downloaded; start the report job with Start-VersionStorageReport.ps1)
+        Requires:    None (reads a CSV you downloaded; start the report job with Start-MttVersionStorageReport)
         Permissions: None
         Level:       Site, Library, File
         Tested:      16 November 2026 in PowerShell 7.6.9 and Windows PowerShell 5.1, on the template and a made-up
