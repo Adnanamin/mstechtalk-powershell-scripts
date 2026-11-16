@@ -1,45 +1,84 @@
 # Unique permissions report for a SharePoint site
 
-`Get-UniquePermissionReport.ps1` lists every library, list, folder, file and list item on a SharePoint site that has stopped inheriting permissions. It ends with a count for each list and level.
+`Get-MttUniquePermission` lists every library, list, folder, file and list item on a SharePoint site that has stopped inheriting permissions.
 
-The script is read-only and writes a CSV report.
+It is a read-only report function for the planned **MSTechTalk.M365** module (see [CONVENTIONS.md](../CONVENTIONS.md)). It doesn't sign in and doesn't write files: you connect first, and pipe the result to `Export-Csv`.
+
+> **Renamed:** this function replaces `Get-UniquePermissionReport.ps1`. The logic is the same; signing in and the CSV export moved out to the calling lines, and list items now show as `Item` instead of `File`.
 
 ## Requirements
 
-- PowerShell 7.4 or later and PnP.PowerShell 3.x (tested with 3.5.0).
-- Your own Entra app registration for `Connect-PnPOnline`.
-- Site collection admin on the site.
+| | |
+|---|---|
+| **Requires** | PnP |
+| **Level** | Site, Library |
+| **PowerShell** | 7.4 or later |
+| **Module** | PnP.PowerShell 3.x |
+| **Sign-in** | `Connect-PnPOnline` with your own Entra app registration (`-ClientId`) |
+| **Permissions** | Site collection admin on the site |
 
-## Usage
+## How to run it
 
 ```powershell
-.\Get-UniquePermissionReport.ps1 -SiteUrl https://contoso.sharepoint.com/sites/PMO -ClientId <your-app-client-id> -Report C:\Temp\UniquePermissions.csv
+Connect-PnPOnline -Url $SiteUrl -Interactive -ClientId $ClientId
+. .\Get-MttUniquePermission.ps1
+Get-MttUniquePermission -SiteUrl $SiteUrl | Export-Csv .\UniquePermissions.csv -NoTypeInformation -Encoding UTF8
 ```
 
-Columns: `List`, `Level` (List, Folder or File), `Path`.
+Check one library first on a big site:
 
-Output from the demo site in the article:
+```powershell
+Get-MttUniquePermission -SiteUrl $SiteUrl -Library "Documents"
+```
+
+Count the results per list and level:
+
+```powershell
+Get-MttUniquePermission -SiteUrl $SiteUrl | Group-Object List, Level | Select-Object Name, Count
+```
+
+`Get-Help Get-MttUniquePermission -Full` shows every parameter and example, and `Get-Help Get-MttUniquePermission -Online` opens the blog post.
+
+## Parameters
+
+| Parameter | Description |
+|---|---|
+| `-SiteUrl` | Site to report on (alias `Url`). Accepts pipeline input. It must be the site your PnP connection is signed in to; any other site is skipped with a warning. |
+| `-Library` | Title of one library or list. Leave it out to check every visible library and list. |
+
+## Output
+
+One `MSTechTalk.UniquePermission` object per object with unique permissions:
+
+| Property | Description |
+|---|---|
+| `SiteUrl` | Site the row belongs to |
+| `List` | Title of the library or list |
+| `Level` | `List`, `Folder`, `File` or `Item` |
+| `Path` | Server-relative path of the folder, file or item; the title for a library or list |
+
+Count per list and level on the demo site in the article (`Group-Object List, Level`):
 
 ```text
 Name                          Count
 ----                          -----
-Governance and Steering, List     1
 Governance and Steering, File     1
-Projects, List                    1
-Projects, Folder                 39
+Governance and Steering, List     1
 Projects, File                   11
-Risk Register, File               3
-Templates, List                   1
-Templates, Folder                 1
+Projects, Folder                 39
+Projects, List                    1
+Risk Register, Item               3
 Templates, File                   2
+Templates, Folder                 1
+Templates, List                   1
 ```
 
-[samples/UniquePermissions-sample.csv](samples/UniquePermissions-sample.csv) is the full CSV from that run. List items, like the three in the Risk Register, show as File because that is the file system object type SharePoint returns for a list item.
+[samples/UniquePermissions-sample.csv](samples/UniquePermissions-sample.csv) is the full output from that run.
 
 ## Important notes
 
-- `Get-PnPListItem` doesn't load `HasUniqueRoleAssignments`, so the script loads it per item with `Get-PnPProperty`. That's one call per item: the demo site (about 5,000 items) took 24 minutes. Point `$lists` at one library first on a big site.
-- Every sharing link creates its own permission scope. Check the Anyone links report before you restore inheritance, because restoring it removes those links.
+- `Get-PnPListItem` doesn't load `HasUniqueRoleAssignments`, so the function loads it per item. That's one call per item: the demo site (about 9,000 items in 16 lists) took 24 to 30 minutes. Use `-Library` to check one library first.
+- Every sharing link creates its own permission scope. Check the [Anyone links report](../SharePoint-Anyone-Sharing-Links/) before you restore inheritance, because restoring it removes those links.
 
 ## Author
 

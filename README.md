@@ -16,7 +16,7 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 | `Measure-VersionStorageReport.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site | None | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Invoke-VersionTrim.ps1` *(changes data)* | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Get-AnyoneSharingLink.ps1` | [SharePoint-Anyone-Sharing-Links](./SharePoint-Anyone-Sharing-Links/) | Site, Library | PnP | [Find Anyone links with PnP PowerShell](https://mstechtalk.com/find-anyone-links-sharepoint-pnp-powershell/) |
-| `Get-UniquePermissionReport.ps1` | [SharePoint-Unique-Permissions](./SharePoint-Unique-Permissions/) | Site, Library | PnP | [SharePoint unique permissions report](https://mstechtalk.com/sharepoint-unique-permissions-report-pnp-powershell/) |
+| `Get-MttUniquePermission.ps1` | [SharePoint-Unique-Permissions](./SharePoint-Unique-Permissions/) | Site, Library | PnP | [SharePoint unique permissions report](https://mstechtalk.com/sharepoint-unique-permissions-report-pnp-powershell/) |
 | `Get-LargeListItem.ps1` | [SharePoint-Large-Lists](./SharePoint-Large-Lists/) | List | PnP | [Fix the 5,000-item list view threshold](https://mstechtalk.com/sharepoint-list-view-threshold-5000-fix/) |
 | `Find-DeprecatedGraphEndpoint.ps1` | [Graph-SharedWithMe-Retirement](./Graph-SharedWithMe-Retirement/) | Local script files | None | [Graph sharedWithMe retirement](https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/) |
 | `Get-RecentDocumentBySearch.ps1` | [Graph-SharedWithMe-Retirement](./Graph-SharedWithMe-Retirement/) | User | Graph | [Graph sharedWithMe retirement](https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/) |
@@ -73,8 +73,8 @@ Tools for finding every Anyone (anonymous) sharing link on a SharePoint site.
 
 Tools for listing everything on a SharePoint site that has stopped inheriting permissions.
 
-- **Script:** `Get-UniquePermissionReport.ps1`
-- **Features:** Libraries, lists, folders, files and list items with unique permissions, exported to CSV with a count per list and level.
+- **Script:** `Get-MttUniquePermission.ps1` (module-ready function; replaces `Get-UniquePermissionReport.ps1`)
+- **Features:** Libraries, lists, folders, files and list items with unique permissions, for one site or one library, returned as objects you can export to CSV.
 - **Requirements:** PowerShell 7.4 or later, PnP.PowerShell 3.x and your own Entra app registration.
 - **Documentation:** [SharePoint Unique Permissions](./SharePoint-Unique-Permissions/README.md)
 
