@@ -4,14 +4,14 @@
 
 | Script | What it does |
 |---|---|
-| `Find-DeprecatedGraphEndpoint.ps1` | Searches a folder of scripts and exported config (.ps1, .psm1, .js, .ts, .json) for calls to the four endpoints |
+| `Find-MttDeprecatedGraphEndpoint.ps1` | Report function: searches a folder of scripts and exported config (.ps1, .psm1, .js, .ts, .json) for calls to the four endpoints |
 | `Get-RecentDocumentBySearch.ps1` | Lists the signed-in user's most recently modified documents with the Microsoft Search API, as a replacement for a recent-files view |
 
 Both are read-only.
 
 ## Requirements
 
-- `Find-DeprecatedGraphEndpoint.ps1`: no module. Windows PowerShell 5.1 or PowerShell 7.
+- `Find-MttDeprecatedGraphEndpoint.ps1`: no module and no sign-in. Windows PowerShell 5.1 or PowerShell 7.
 - `Get-RecentDocumentBySearch.ps1`: Microsoft.Graph.Authentication (tested with 2.41.2), delegated `Files.Read.All` and `Sites.Read.All`.
 
 ```powershell
@@ -20,8 +20,46 @@ Install-Module Microsoft.Graph.Authentication -Scope CurrentUser
 
 ## Usage
 
+### Find-MttDeprecatedGraphEndpoint
+
+A read-only report function for the planned **MSTechTalk.M365** module (see [CONVENTIONS.md](../CONVENTIONS.md)). It replaces `Find-DeprecatedGraphEndpoint.ps1`: it returns rows instead of printing them, adds an `Endpoint` column, and can leave folders out.
+
 ```powershell
-.\Find-DeprecatedGraphEndpoint.ps1 -ScriptFolder C:\Scripts
+. .\Find-MttDeprecatedGraphEndpoint.ps1
+Find-MttDeprecatedGraphEndpoint -Path C:\Scripts | Export-Csv .\GraphEndpoints.csv -NoTypeInformation -Encoding UTF8
+```
+
+Count the matches per endpoint, leaving out an archive folder:
+
+```powershell
+Find-MttDeprecatedGraphEndpoint -Path C:\Scripts -Exclude C:\Scripts\Archive | Group-Object Endpoint | Select-Object Name, Count
+```
+
+| Parameter | Description |
+|---|---|
+| `-Path` | Folder to search, with its subfolders (aliases `FullName`, `ScriptFolder`). Accepts pipeline input, for example from `Get-Item`. |
+| `-Exclude` | Folders to leave out. Any file whose full path starts with one of these is skipped. |
+| `-Include` | File patterns to search. Defaults to `*.ps1`, `*.psm1`, `*.js`, `*.ts` and `*.json`. |
+
+One `MSTechTalk.DeprecatedGraphEndpoint` object per matching line:
+
+| Property | Description |
+|---|---|
+| `Path` | Full path of the file |
+| `LineNumber` | Line number of the match |
+| `Endpoint` | The retired endpoints found on the line: `sharedWithMe`, `drive/recent`, `insights/used` or `insights/shared`, comma-separated when there is more than one |
+| `Line` | The line, without leading and trailing spaces |
+
+| | |
+|---|---|
+| **Requires** | None |
+| **Level** | Local script files |
+
+The search ignores case, so `SharedWithMe` is found too.
+
+### Get-RecentDocumentBySearch.ps1
+
+```powershell
 .\Get-RecentDocumentBySearch.ps1 -Size 25
 ```
 
