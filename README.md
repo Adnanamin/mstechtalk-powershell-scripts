@@ -19,7 +19,7 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 | `Get-MttUniquePermission.ps1` | [SharePoint-Unique-Permissions](./SharePoint-Unique-Permissions/) | Site, Library | PnP | [SharePoint unique permissions report](https://mstechtalk.com/sharepoint-unique-permissions-report-pnp-powershell/) |
 | `Get-MttListItem.ps1` | [SharePoint-Large-Lists](./SharePoint-Large-Lists/) | List | PnP | [Fix the 5,000-item list view threshold](https://mstechtalk.com/sharepoint-list-view-threshold-5000-fix/) |
 | `Find-MttDeprecatedGraphEndpoint.ps1` | [Graph-SharedWithMe-Retirement](./Graph-SharedWithMe-Retirement/) | Local script files | None | [Graph sharedWithMe retirement](https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/) |
-| `Get-RecentDocumentBySearch.ps1` | [Graph-SharedWithMe-Retirement](./Graph-SharedWithMe-Retirement/) | User | Graph | [Graph sharedWithMe retirement](https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/) |
+| `Get-MttRecentDocument.ps1` | [Graph-SharedWithMe-Retirement](./Graph-SharedWithMe-Retirement/) | User | Graph | [Graph sharedWithMe retirement](https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/) |
 | `New-GuestInvitation.ps1` *(changes data)* | [SharePoint-OTP-Retirement](./SharePoint-OTP-Retirement/) | User | Graph | [SharePoint OTP retirement: guest access denied](https://mstechtalk.com/sharepoint-otp-retirement-guest-access-denied/) |
 
 **Level** is what a script reports on. **Requires** is the sign-in it needs:
@@ -91,7 +91,7 @@ Tools for reading SharePoint lists over the 5,000-item list view threshold.
 
 Tools for moving off the Graph file endpoints that stop returning data after November 2026.
 
-- **Scripts:** `Find-MttDeprecatedGraphEndpoint.ps1` (module-ready function; replaces `Find-DeprecatedGraphEndpoint.ps1`), `Get-RecentDocumentBySearch.ps1`
+- **Scripts:** `Find-MttDeprecatedGraphEndpoint.ps1` and `Get-MttRecentDocument.ps1` (module-ready functions; replace `Find-DeprecatedGraphEndpoint.ps1` and `Get-RecentDocumentBySearch.ps1`)
 - **Features:** Finds old calls in your scripts, and lists recent documents with the Microsoft Search API.
 - **Requirements:** Microsoft.Graph.Authentication for the Search API script.
 - **Documentation:** [Microsoft Graph sharedWithMe Retirement](./Graph-SharedWithMe-Retirement/README.md)
