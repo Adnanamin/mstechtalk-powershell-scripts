@@ -8,7 +8,8 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 
 | Script | Folder | Level | Requires | Blog post |
 |---|---|---|---|---|
-| `Get-CopilotAgentUsage.ps1` | [Copilot-and-Agents-Usage](./Copilot-and-Agents-Usage/) | Tenant, User | Graph | [Monitor Copilot and agents usage](https://mstechtalk.com/how-to-monitor-microsoft-365-copilot-and-agents-usage-in-your-organization/) |
+| `Get-MttCopilotUsage.ps1` | [Copilot-and-Agents-Usage](./Copilot-and-Agents-Usage/) | Tenant, User | Graph | [Monitor Copilot and agents usage](https://mstechtalk.com/how-to-monitor-microsoft-365-copilot-and-agents-usage-in-your-organization/) |
+| `Get-MttCopilotAgent.ps1` | [Copilot-and-Agents-Usage](./Copilot-and-Agents-Usage/) | Tenant | Graph | [Monitor Copilot and agents usage](https://mstechtalk.com/how-to-monitor-microsoft-365-copilot-and-agents-usage-in-your-organization/) |
 | `Get-MttCopilotBlockedSite.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant, Site | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
 | `Start-MttRcdInsightsReport.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
 | `Get-MttSiteStorage.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Tenant, Site | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
@@ -37,9 +38,9 @@ Scripts marked *(changes data)* create or change something in your tenant; read 
 
 Tools for reporting on Microsoft 365 Copilot usage and discovering agents in your organization.
 
-- **Script:** `Get-CopilotAgentUsage.ps1`
-- **Features:** Copilot usage reporting, agent inventory, owner information, and agent usage metrics.
-- **Requirements:** PowerShell 7.2 or later and the required Microsoft Graph permissions.
+- **Scripts:** `Get-MttCopilotUsage.ps1` and `Get-MttCopilotAgent.ps1` (module-ready functions; replace `Get-CopilotAgentUsage.ps1`)
+- **Features:** Copilot usage per user with last activity per app and prompt counts, and the agent catalog with owners and 30-day usage, returned as objects you can export to CSV.
+- **Requirements:** PowerShell 7.4 or later, Microsoft.Graph.Authentication and the Microsoft Graph permissions in the folder README. The agent catalog needs a Microsoft Agent 365 licence.
 - **Documentation:** [Copilot and Agents Usage](./Copilot-and-Agents-Usage/README.md)
 
 ### SharePoint Sites with Copilot Blocked
