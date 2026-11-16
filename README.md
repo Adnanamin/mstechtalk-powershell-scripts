@@ -17,7 +17,7 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 | `Invoke-VersionTrim.ps1` *(changes data)* | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Get-MttAnyoneSharingLink.ps1` | [SharePoint-Anyone-Sharing-Links](./SharePoint-Anyone-Sharing-Links/) | Site, Library | PnP | [Find Anyone links with PnP PowerShell](https://mstechtalk.com/find-anyone-links-sharepoint-pnp-powershell/) |
 | `Get-MttUniquePermission.ps1` | [SharePoint-Unique-Permissions](./SharePoint-Unique-Permissions/) | Site, Library | PnP | [SharePoint unique permissions report](https://mstechtalk.com/sharepoint-unique-permissions-report-pnp-powershell/) |
-| `Get-LargeListItem.ps1` | [SharePoint-Large-Lists](./SharePoint-Large-Lists/) | List | PnP | [Fix the 5,000-item list view threshold](https://mstechtalk.com/sharepoint-list-view-threshold-5000-fix/) |
+| `Get-MttListItem.ps1` | [SharePoint-Large-Lists](./SharePoint-Large-Lists/) | List | PnP | [Fix the 5,000-item list view threshold](https://mstechtalk.com/sharepoint-list-view-threshold-5000-fix/) |
 | `Find-DeprecatedGraphEndpoint.ps1` | [Graph-SharedWithMe-Retirement](./Graph-SharedWithMe-Retirement/) | Local script files | None | [Graph sharedWithMe retirement](https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/) |
 | `Get-RecentDocumentBySearch.ps1` | [Graph-SharedWithMe-Retirement](./Graph-SharedWithMe-Retirement/) | User | Graph | [Graph sharedWithMe retirement](https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/) |
 | `New-GuestInvitation.ps1` *(changes data)* | [SharePoint-OTP-Retirement](./SharePoint-OTP-Retirement/) | User | Graph | [SharePoint OTP retirement: guest access denied](https://mstechtalk.com/sharepoint-otp-retirement-guest-access-denied/) |
@@ -82,8 +82,8 @@ Tools for listing everything on a SharePoint site that has stopped inheriting pe
 
 Tools for reading SharePoint lists over the 5,000-item list view threshold.
 
-- **Script:** `Get-LargeListItem.ps1`
-- **Features:** Paged reads of every item, and CAML queries on an indexed column.
+- **Script:** `Get-MttListItem.ps1` (module-ready function; replaces `Get-LargeListItem.ps1`)
+- **Features:** Paged reads of every item, or only the items with one value in an indexed column, returned as objects you can export to CSV; warns before filtering on a column that isn't indexed.
 - **Requirements:** PowerShell 7.4 or later, PnP.PowerShell 3.x and your own Entra app registration.
 - **Documentation:** [SharePoint Large Lists](./SharePoint-Large-Lists/README.md)
 
