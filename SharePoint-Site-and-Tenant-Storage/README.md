@@ -138,14 +138,26 @@ Try it on the sample first: `Measure-MttVersionStorage -ReportPath .\templates\V
 
 ### 4. Set limits and trim
 
-Preview first. Nothing changes with `-WhatIf`:
+> **Warning:** versions deleted by a trim job are gone for good. They don't go to the recycle bin. Files under a retention policy or label keep their versions whatever you set.
+
+`Invoke-VersionTrim.ps1` is a change script, not a module function (see [CONVENTIONS.md](../CONVENTIONS.md)). It signs in itself, and in PowerShell 7 it loads the SharePoint module with `-UseWindowsPowerShell`.
+
+**Plan first.** Without `-Apply` nothing changes. The script writes a plan CSV with the current limits, the new ones and the trim job it would queue. Add `-ReportPath` with the report from step 2 and it also estimates what the trim would free:
 
 ```powershell
 .\Invoke-VersionTrim.ps1 -AdminUrl https://contoso-admin.sharepoint.com `
-    -SiteUrl https://contoso.sharepoint.com/sites/Projects -Mode Automatic -WhatIf
+    -SiteUrl https://contoso.sharepoint.com/sites/Projects -Mode MajorVersionLimit -MajorVersionLimit 100 `
+    -ReportPath C:\Temp\VersionReport.csv
 ```
 
-Then run it without `-WhatIf`. You're asked to confirm twice: once for the limits, once for the trim.
+**Test on one library first,** then run it for the site. `-WhatIf` shows the two steps without running them; without it you're asked to confirm each one, the limits and then the trim:
+
+```powershell
+.\Invoke-VersionTrim.ps1 -AdminUrl https://contoso-admin.sharepoint.com `
+    -SiteUrl https://contoso.sharepoint.com/sites/Projects -Library "Documents" -Mode MajorVersionLimit -Apply -WhatIf
+.\Invoke-VersionTrim.ps1 -AdminUrl https://contoso-admin.sharepoint.com `
+    -SiteUrl https://contoso.sharepoint.com/sites/Projects -Library "Documents" -Mode MajorVersionLimit -Apply
+```
 
 | `-Mode` | Limit set for new versions | Trim job on existing versions |
 |---|---|---|
@@ -153,9 +165,20 @@ Then run it without `-WhatIf`. You're asked to confirm twice: once for the limit
 | `MajorVersionLimit` | keep `-MajorVersionLimit` (default 100), no age limit | keep `-MajorVersionLimit`, `-MajorWithMinorVersionsLimit` (default 0) |
 | `DeleteBeforeDays` | keep `-MajorVersionLimit`, expire after `-DeleteBeforeDays` | delete versions older than `-DeleteBeforeDays` (default 365) |
 
-Other switches: `-Library "Documents"` for one library, `-TrimOnly` to leave the limits alone, `-Status` to check the trim job, `-Stop` to stop it (versions already deleted stay deleted).
+Other switches: `-Library "Documents"` for one library, `-TrimOnly` to leave the limits alone, `-PlanPath` to choose where the plan goes, `-Status` to check the trim job, `-Stop` to stop it.
 
 Changing limits only affects versions created from now on. The trim job is what removes the versions already there, and it runs in batches over the next days.
+
+**How to undo**
+
+- **Limits:** keep the plan CSV. Its `Current` column has the old limits; set them back with `Set-SPOListVersionPolicy` for a library or `Set-SPOSite` for a site. If the site had no limits of its own, `Set-SPOSite -Identity <site> -InheritVersionPolicyFromTenant` makes new libraries follow the organization limits again; existing libraries keep the new limits until you set them per library.
+- **Trim:** can't be undone. `-Stop` stops the job, but versions already deleted stay deleted.
+
+| | |
+|---|---|
+| **Requires** | SPO |
+| **Level** | Site, Library |
+| **Permissions** | SharePoint Administrator |
 
 ## CSV templates
 
