@@ -1,12 +1,12 @@
 # SharePoint site and tenant storage
 
-Scripts for the MSTechTalk post [How to find what is filling a SharePoint site and free up tenant storage](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) by Adnan Amin.
+Scripts and functions for the MSTechTalk post [How to find what is filling a SharePoint site and free up tenant storage](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) by Adnan Amin.
 
-Three scripts use the **SharePoint Online Management Shell** (`Microsoft.Online.SharePoint.PowerShell`). `Measure-VersionStorageReport.ps1` only reads a CSV on your machine and needs no module.
+Three of them use the **SharePoint Online Management Shell** (`Microsoft.Online.SharePoint.PowerShell`). `Measure-VersionStorageReport.ps1` only reads a CSV on your machine and needs no module.
 
 | Script | What it does | Changes anything? |
 |---|---|---|
-| `Get-TopSitesByStorage.ps1` | Exports the sites using the most storage, with last change date | No |
+| `Get-MttSiteStorage.ps1` | Report function: lists sites by the storage they use, largest first, with last change date | No |
 | `Start-VersionStorageReport.ps1` | Starts Microsoft's version storage report job for a site, OneDrive or library, or checks its progress | Creates the report CSV only |
 | `Measure-VersionStorageReport.ps1` | Reads the finished report: version history size per file, library and person, and what a trim would free | No |
 | `Invoke-VersionTrim.ps1` | Sets version history limits and queues a trim job for the versions already there | **Yes. Deleted versions can't be recovered** |
@@ -22,11 +22,37 @@ Three scripts use the **SharePoint Online Management Shell** (`Microsoft.Online.
 
 ### 1. Find the biggest sites
 
+`Get-MttSiteStorage` is a read-only report function for the planned **MSTechTalk.M365** module (see [CONVENTIONS.md](../CONVENTIONS.md)). It replaces `Get-TopSitesByStorage.ps1`: it doesn't sign in or write the CSV itself, `-Top` is optional, and `-SiteUrl` checks one site or a few.
+
+In PowerShell 7, import the module with `-UseWindowsPowerShell`, as Microsoft requires. In Windows PowerShell 5.1, leave that line out.
+
 ```powershell
-.\Get-TopSitesByStorage.ps1 -AdminUrl https://contoso-admin.sharepoint.com -Top 25
+Import-Module Microsoft.Online.SharePoint.PowerShell -UseWindowsPowerShell
+Connect-SPOService -Url https://contoso-admin.sharepoint.com
+. .\Get-MttSiteStorage.ps1
+Get-MttSiteStorage -Top 25 | Export-Csv .\SiteStorage.csv -NoTypeInformation -Encoding UTF8
 ```
 
-Writes `TopSitesByStorage.csv`. Big sites with a high `DaysSinceLastChange` are archive candidates. See `templates/TopSitesByStorage-template.csv` for the layout.
+Archive candidates, over 100 GB and unchanged for a year:
+
+```powershell
+Get-MttSiteStorage | Where-Object { $_.StorageUsedGB -gt 100 -and $_.DaysSinceLastChange -gt 365 }
+```
+
+| Parameter | Description |
+|---|---|
+| `-SiteUrl` | One or more sites to report on (alias `Url`). Accepts pipeline input. Leave it out for every site in the tenant (OneDrive excluded). |
+| `-Top` | Return only this many sites, the largest first. Leave it out to return them all. |
+
+One `MSTechTalk.SiteStorage` object per site, largest first: `SiteUrl`, `Title`, `Template`, `StorageUsedGB`, `StorageQuotaGB`, `PercentUsed`, `LastContentModified` and `DaysSinceLastChange`. `-Verbose` also shows the number of sites and the total storage they use. See `templates/TopSitesByStorage-template.csv` for the layout.
+
+| | |
+|---|---|
+| **Requires** | SPO |
+| **Level** | Tenant, Site |
+| **Permissions** | SharePoint Administrator |
+
+On the demo tenant it read 72 sites in a second or two, in PowerShell 7 and 5.1, with the same top 25 as the old script.
 
 ### 2. Start the version storage report on one of them
 
@@ -108,7 +134,7 @@ Changing limits only affects versions created from now on. The trim job is what 
 | `AutomaticPolicyExpirationDate` | When it would expire under automatic limits |
 | `TargetExpirationDate` | Same as current at first. Edit it to model a different schedule in Microsoft's analysis tools |
 
-**`TopSitesByStorage-template.csv`** is the output of `Get-TopSitesByStorage.ps1`: `Url`, `Title`, `Template`, `LastContentModifiedDate`, `UsedGB`, `QuotaGB`, `DaysSinceLastChange`.
+**`TopSitesByStorage-template.csv`** shows the output of `Get-MttSiteStorage` exported to CSV: `SiteUrl`, `Title`, `Template`, `StorageUsedGB`, `StorageQuotaGB`, `PercentUsed`, `LastContentModified`, `DaysSinceLastChange`.
 
 ## References
 
