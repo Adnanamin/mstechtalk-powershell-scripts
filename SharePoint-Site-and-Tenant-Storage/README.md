@@ -2,13 +2,13 @@
 
 Scripts and functions for the MSTechTalk post [How to find what is filling a SharePoint site and free up tenant storage](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) by Adnan Amin.
 
-Three of them use the **SharePoint Online Management Shell** (`Microsoft.Online.SharePoint.PowerShell`). `Measure-VersionStorageReport.ps1` only reads a CSV on your machine and needs no module.
+Three of them use the **SharePoint Online Management Shell** (`Microsoft.Online.SharePoint.PowerShell`). `Measure-MttVersionStorage.ps1` only reads a CSV on your machine and needs no module.
 
 | Script | What it does | Changes anything? |
 |---|---|---|
 | `Get-MttSiteStorage.ps1` | Report function: lists sites by the storage they use, largest first, with last change date | No |
 | `Start-VersionStorageReport.ps1` | Starts Microsoft's version storage report job for a site, OneDrive or library, or checks its progress | Creates the report CSV only |
-| `Measure-VersionStorageReport.ps1` | Reads the finished report: version history size per file, library and person, and what a trim would free | No |
+| `Measure-MttVersionStorage.ps1` | Report function: reads the finished report and returns version history size per file, or the totals, and what a trim would free | No |
 | `Invoke-VersionTrim.ps1` | Sets version history limits and queues a trim job for the versions already there | **Yes. Deleted versions can't be recovered** |
 
 ## Prerequisites
@@ -16,7 +16,7 @@ Three of them use the **SharePoint Online Management Shell** (`Microsoft.Online.
 - SharePoint Administrator role.
 - SharePoint Online Management Shell, latest version: `Install-Module Microsoft.Online.SharePoint.PowerShell` (or `Update-Module`). The report and trim cmdlets need a recent build.
 - Windows. The SPO module runs in Windows PowerShell 5.1, or PowerShell 7 on Windows.
-- `Measure-VersionStorageReport.ps1` runs anywhere: Windows PowerShell 5.1 or PowerShell 7 on Windows, macOS or Linux.
+- `Measure-MttVersionStorage.ps1` runs anywhere: Windows PowerShell 5.1 or PowerShell 7 on Windows, macOS or Linux.
 
 ## Run order
 
@@ -77,22 +77,44 @@ Check progress until the status is `completed`:
 
 ### 3. Analyse the report
 
+`Measure-MttVersionStorage` is a read-only report function for the planned **MSTechTalk.M365** module. It replaces `Measure-VersionStorageReport.ps1`: it returns rows instead of writing two CSVs next to the report, and it needs no module and no sign-in.
+
 Download the CSV, then:
 
 ```powershell
-.\Measure-VersionStorageReport.ps1 -ReportPath C:\Temp\VersionReport.csv -KeepVersions 100 -OlderThanDays 365
+. .\Measure-MttVersionStorage.ps1
+Measure-MttVersionStorage -ReportPath C:\Temp\VersionReport.csv -Summary
+Measure-MttVersionStorage -ReportPath C:\Temp\VersionReport.csv | Select-Object -First 20
 ```
 
-On screen you get the totals and the top files. Two CSVs are saved next to the report:
+Save both to CSV:
 
-| File | One row per | Main columns |
+```powershell
+Measure-MttVersionStorage -ReportPath C:\Temp\VersionReport.csv -Summary | Export-Csv .\VersionStorage-Summary.csv -NoTypeInformation -Encoding UTF8
+Measure-MttVersionStorage -ReportPath C:\Temp\VersionReport.csv | Export-Csv .\VersionStorage-Files.csv -NoTypeInformation -Encoding UTF8
+```
+
+| Parameter | Description |
+|---|---|
+| `-ReportPath` | Path of the report CSV (aliases `FullName`, `Path`). Accepts pipeline input, for example from `Get-ChildItem`. |
+| `-KeepVersions` | What-if: keep this many newest versions per file, the current one included. Defaults to 100. |
+| `-OlderThanDays` | What-if: delete older versions last modified more than this many days ago. Defaults to 365. |
+| `-Summary` | Return one row of totals instead of one row per file. |
+
+| Output | One row per | Properties |
 |---|---|---|
-| `VersionStorage-Summary.csv` | report | total size, current versions, version history (GB), what-if for `-KeepVersions` and `-OlderThanDays` |
-| `VersionStorage-Files.csv` | file | `Versions`, `CurrentVersion`, `CurrentSizeMB`, `HistorySizeMB`, `TotalSizeMB` |
+| `MSTechTalk.VersionStorageFile` (default) | file, largest version history first | `SiteUrl`, `FileUrl`, `Versions`, `CurrentVersion`, `CurrentSizeMB`, `HistorySizeMB`, `TotalSizeMB`, `KeepFreesMB`, `OlderThanFreesMB` |
+| `MSTechTalk.VersionStorageSummary` (`-Summary`) | report | `ReportPath`, `FileVersions`, `Files`, `TotalSizeGB`, `CurrentVersionsGB`, `VersionHistoryGB`, `VersionHistoryVersions`, `KeepVersions`, `KeepFreesGB`, `OlderThanDays`, `OlderThanFreesGB` |
+
+| | |
+|---|---|
+| **Requires** | None |
+| **Level** | Site, Library, File |
+| **PowerShell** | Windows PowerShell 5.1 or PowerShell 7, on any OS |
 
 The newest version of each file (highest major.minor) counts as the current version. Everything else is version history. The what-if numbers are estimates: the real trim job uses SharePoint's own rules, and files under retention keep their versions.
 
-Try it on the sample first (copy `templates\VersionStorageReport-template.csv` to `C:\Temp` so the results don't land in the templates folder): `.\Measure-VersionStorageReport.ps1 -ReportPath C:\Temp\VersionStorageReport-template.csv -KeepVersions 2`
+Try it on the sample first: `Measure-MttVersionStorage -ReportPath .\templates\VersionStorageReport-template.csv -KeepVersions 2 -Summary`
 
 ### 4. Set limits and trim
 

@@ -9,7 +9,7 @@
     Don't open or edit the CSV while it fills, or the job fails. Delete the CSV to cancel.
 
     Run once to start the job, then run again with -CheckProgress until the status is "completed".
-    Then download the CSV and run Measure-VersionStorageReport.ps1 on it.
+    Then download the CSV and run Measure-MttVersionStorage on it.
 
     Module : SharePoint Online Management Shell (Microsoft.Online.SharePoint.PowerShell)
     Role   : SharePoint Administrator
