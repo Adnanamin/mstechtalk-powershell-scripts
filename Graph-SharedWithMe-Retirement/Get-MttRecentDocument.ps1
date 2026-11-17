@@ -45,7 +45,7 @@ function Get-MttRecentDocument {
         Tested:      16 November 2026 on the MST demo tenant (PowerShell 7.6.9 and Windows PowerShell 5.1,
                      Microsoft.Graph.Authentication 2.41.2): same first 25 as Get-RecentDocumentBySearch.ps1
     .LINK
-        [POST URL]
+        https://mstechtalk.com/graph-sharedwithme-recent-retired-search-api/
     #>
     [CmdletBinding()]
     [OutputType('MSTechTalk.RecentDocument')]
