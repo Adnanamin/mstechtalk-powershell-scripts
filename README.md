@@ -17,6 +17,7 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 | `Get-MttVersionStorageReportStatus.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Measure-MttVersionStorage.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library, File | None | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Invoke-VersionTrim.ps1` *(changes data)* | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
+| `Get-MttArchivedFileStorage.ps1` | [SharePoint-File-Archive](./SharePoint-File-Archive/) | Tenant, Site | SPO | [Archive inactive SharePoint files](https://mstechtalk.com/sharepoint-archive-inactive-files/) |
 | `Get-MttAnyoneSharingLink.ps1` | [SharePoint-Anyone-Sharing-Links](./SharePoint-Anyone-Sharing-Links/) | Site, Library | PnP | [Find Anyone links with PnP PowerShell](https://mstechtalk.com/find-anyone-links-sharepoint-pnp-powershell/) |
 | `Get-MttUniquePermission.ps1` | [SharePoint-Unique-Permissions](./SharePoint-Unique-Permissions/) | Site, Library | PnP | [SharePoint unique permissions report](https://mstechtalk.com/sharepoint-unique-permissions-report-pnp-powershell/) |
 | `Get-MttListItem.ps1` | [SharePoint-Large-Lists](./SharePoint-Large-Lists/) | List | PnP | Fix the 5,000-item list view threshold (coming soon) |
@@ -61,6 +62,15 @@ Tools for finding what is filling a SharePoint site, measuring version history s
 - **Features:** Top sites by storage, version storage report jobs, version history analysis per file, library and user, what-if estimates, version limits and trim jobs.
 - **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role. `Measure-MttVersionStorage.ps1` needs no module.
 - **Documentation:** [SharePoint Site and Tenant Storage](./SharePoint-Site-and-Tenant-Storage/README.md)
+
+### SharePoint File Archive
+
+Tools for checking file-level archive in SharePoint after Microsoft Ignite 2026.
+
+- **Script:** `Get-MttArchivedFileStorage.ps1` (module-ready function)
+- **Features:** Storage used, storage held by file-level archived files and the archive setting for every site or the sites you give it, returned as objects you can export to CSV.
+- **Requirements:** SharePoint Online Management Shell 16.0.27814.12015 or later and the SharePoint Administrator role.
+- **Documentation:** [SharePoint File Archive](./SharePoint-File-Archive/README.md)
 
 ### Anyone Links on a SharePoint Site
 
