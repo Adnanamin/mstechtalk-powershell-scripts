@@ -18,6 +18,7 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 | `Measure-MttVersionStorage.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library, File | None | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Get-MttSite.ps1` | [SharePoint-Site-Inventory](./SharePoint-Site-Inventory/) | Tenant | SPO | Site inventory for tenant-wide reports (no post yet) |
 | `Invoke-VersionTrim.ps1` *(changes data)* | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
+| `Get-MttOneDriveUsage.ps1` | [OneDrive-Storage-Quota](./OneDrive-Storage-Quota/) | Tenant, User | SPO | [Find OneDrive accounts near their quota](https://mstechtalk.com/find-onedrive-accounts-near-their-storage-quota-with-powershell/) |
 | `Get-MttBaselineSharePointSetting.ps1` | [SharePoint-Baseline-Security-Mode](./SharePoint-Baseline-Security-Mode/) | Tenant | SPO | [SharePoint Baseline Security Mode settings](https://mstechtalk.com/sharepoint-baseline-security-mode-2026/) |
 | `Get-MttCustomScriptSite.ps1` | [SharePoint-Baseline-Security-Mode](./SharePoint-Baseline-Security-Mode/) | Tenant, Site | SPO | [SharePoint Baseline Security Mode settings](https://mstechtalk.com/sharepoint-baseline-security-mode-2026/) |
 | `Get-MttArchivedFileStorage.ps1` | [SharePoint-File-Archive](./SharePoint-File-Archive/) | Tenant, Site | SPO | [Archive inactive SharePoint files](https://mstechtalk.com/sharepoint-archive-inactive-files/) |
@@ -74,6 +75,15 @@ Tools for finding what is filling a SharePoint site, measuring version history s
 - **Features:** Top sites by storage, version storage report jobs, version history analysis per file, library and user, what-if estimates, version limits and trim jobs.
 - **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role. `Measure-MttVersionStorage.ps1` needs no module.
 - **Documentation:** [SharePoint Site and Tenant Storage](./SharePoint-Site-and-Tenant-Storage/README.md)
+
+### OneDrive Storage Quota
+
+Tools for finding OneDrive accounts near their quota or above the storage their licence includes.
+
+- **Script:** `Get-MttOneDriveUsage.ps1` (module-ready function)
+- **Features:** Storage used, quota, percentage of quota and storage above the licensed amount for every OneDrive or the users you give it, returned as objects you can export to CSV.
+- **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role.
+- **Documentation:** [OneDrive Storage Quota](./OneDrive-Storage-Quota/README.md)
 
 ### SharePoint and Baseline Security Mode
 
