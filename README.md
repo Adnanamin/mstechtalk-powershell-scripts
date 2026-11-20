@@ -16,7 +16,7 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 | `Start-MttVersionStorageReport.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Get-MttVersionStorageReportStatus.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Measure-MttVersionStorage.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library, File | None | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
-| `Get-MttSite.ps1` | [SharePoint-Site-Inventory](./SharePoint-Site-Inventory/) | Tenant | SPO | Site inventory for tenant-wide reports (no post yet) |
+| `Get-MttSite.ps1` | [SharePoint-Site-Inventory](./SharePoint-Site-Inventory/) | Tenant | SPO | Build a SharePoint site inventory (post coming soon) |
 | `Invoke-VersionTrim.ps1` *(changes data)* | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Get-MttOneDriveUsage.ps1` | [OneDrive-Storage-Quota](./OneDrive-Storage-Quota/) | Tenant, User | SPO | [Find OneDrive accounts near their quota](https://mstechtalk.com/find-onedrive-accounts-near-their-storage-quota-with-powershell/) |
 | `Get-MttBaselineSharePointSetting.ps1` | [SharePoint-Baseline-Security-Mode](./SharePoint-Baseline-Security-Mode/) | Tenant | SPO | [SharePoint Baseline Security Mode settings](https://mstechtalk.com/sharepoint-baseline-security-mode-2026/) |
@@ -63,7 +63,7 @@ Tools for listing the SharePoint sites where Copilot is blocked by Restricted Co
 The starting point for tenant-wide reports: every SharePoint site in one call.
 
 - **Script:** `Get-MttSite.ps1` (module-ready function)
-- **Features:** Template, owner, storage, last change date, Teams connection and lock state for every site, filtered by template if you like, returned as objects you can filter or pipe into other `Mtt` functions.
+- **Features:** Site type, owner, storage, hub, last change date, Teams connection, lock and archive state for every site, and external sharing with `-IncludeSharing`, returned as objects you can filter or pipe into other `Mtt` functions.
 - **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role.
 - **Documentation:** [SharePoint Site Inventory](./SharePoint-Site-Inventory/README.md)
 
