@@ -13,7 +13,7 @@ Function for the MSTechTalk post [Find OneDrive accounts near their storage quot
 - **Quota** (`StorageQuotaGB`) is the limit set on the account. An admin can raise it above what the licence includes.
 - **Licensed storage** (`EntitlementGB`) is what the user's licence includes. With [OneDrive pay-as-you-go storage](https://learn.microsoft.com/microsoft-365/commerce/add-storage-space), Microsoft bills the storage used above this amount, not above the quota.
 
-So a user with a 3 TB quota who uses 1.2 TB is only 40% of the way to their quota, but already about 176 GB above a 1 TB licence. `OverEntitlementGB` shows that amount.
+So a user with a 3 TB quota who uses 1.2 TB is only 40% of the way to their quota, but already about 205 GB above a 1 TB licence. `OverEntitlementGB` shows that amount.
 
 The function can't read each user's licence. `EntitlementGB` is the value you pass with `-EntitlementGB`, 1024 GB (1 TB) when you leave it out. Set it to what your plan includes.
 
