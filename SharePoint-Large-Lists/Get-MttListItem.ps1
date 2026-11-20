@@ -60,7 +60,7 @@ function Get-MttListItem {
         Level:       List
         Tested:      16 November 2026 on the MST demo tenant (PowerShell 7.6.9, PnP.PowerShell 3.5.0)
     .LINK
-        [POST URL]
+        https://mstechtalk.com/sharepoint-list-view-threshold-5000-fix/
     #>
     [CmdletBinding()]
     [OutputType('MSTechTalk.ListItem')]
