@@ -16,6 +16,7 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 | `Start-MttVersionStorageReport.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Get-MttVersionStorageReportStatus.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Measure-MttVersionStorage.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library, File | None | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
+| `Get-MttSite.ps1` | [SharePoint-Site-Inventory](./SharePoint-Site-Inventory/) | Tenant | SPO | Site inventory for tenant-wide reports (no post yet) |
 | `Invoke-VersionTrim.ps1` *(changes data)* | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Site, Library | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
 | `Get-MttBaselineSharePointSetting.ps1` | [SharePoint-Baseline-Security-Mode](./SharePoint-Baseline-Security-Mode/) | Tenant | SPO | [SharePoint Baseline Security Mode settings](https://mstechtalk.com/sharepoint-baseline-security-mode-2026/) |
 | `Get-MttCustomScriptSite.ps1` | [SharePoint-Baseline-Security-Mode](./SharePoint-Baseline-Security-Mode/) | Tenant, Site | SPO | [SharePoint Baseline Security Mode settings](https://mstechtalk.com/sharepoint-baseline-security-mode-2026/) |
@@ -55,6 +56,15 @@ Tools for listing the SharePoint sites where Copilot is blocked by Restricted Co
 - **Features:** Per-site RCD check for the whole tenant or the sites you give it, and Microsoft's RCD insights report queued, waited for and downloaded, both returned as objects you can export to CSV.
 - **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role.
 - **Documentation:** [SharePoint Sites with Copilot Blocked](./SharePoint-Copilot-Blocked-Sites/README.md)
+
+### SharePoint Site Inventory
+
+The starting point for tenant-wide reports: every SharePoint site in one call.
+
+- **Script:** `Get-MttSite.ps1` (module-ready function)
+- **Features:** Template, owner, storage, last change date, Teams connection and lock state for every site, filtered by template if you like, returned as objects you can filter or pipe into other `Mtt` functions.
+- **Requirements:** SharePoint Online Management Shell and the SharePoint Administrator role.
+- **Documentation:** [SharePoint Site Inventory](./SharePoint-Site-Inventory/README.md)
 
 ### SharePoint Site and Tenant Storage
 
