@@ -173,6 +173,10 @@ Through [MSTechTalk](https://mstechtalk.com), he shares technical articles, impl
 - **Blog:** [MSTechTalk](https://mstechtalk.com)
 - **GitHub:** [adnanamin](https://github.com/adnanamin)
 
+### How these scripts are built
+
+Every script is written, tested and published by Adnan Amin. Claude (Anthropic) assists with code review and testing. Each function is run on a demo tenant before it is published, and its help block records when it was last tested.
+
 ## Disclaimer
 
 These scripts are provided as-is, without warranties. You are responsible for reviewing and testing them and for ensuring that their use complies with your organization's policies and security requirements.
