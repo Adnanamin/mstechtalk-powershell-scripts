@@ -10,6 +10,7 @@ These scripts help IT professionals, Microsoft 365 administrators, consultants, 
 |---|---|---|---|---|
 | `Get-MttCopilotUsage.ps1` | [Copilot-and-Agents-Usage](./Copilot-and-Agents-Usage/) | Tenant, User | Graph | [Monitor Copilot and agents usage](https://mstechtalk.com/how-to-monitor-microsoft-365-copilot-and-agents-usage-in-your-organization/) |
 | `Get-MttCopilotAgent.ps1` | [Copilot-and-Agents-Usage](./Copilot-and-Agents-Usage/) | Tenant | Graph | [Monitor Copilot and agents usage](https://mstechtalk.com/how-to-monitor-microsoft-365-copilot-and-agents-usage-in-your-organization/) |
+| `Get-MttCopilotContainer.ps1` | [Copilot-Workspaces-Storage](./Copilot-Workspaces-Storage/) | Tenant | SPO | [Copilot Workspaces for admins](https://mstechtalk.com/copilot-workspaces-admin-storage-security/) |
 | `Get-MttCopilotBlockedSite.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant, Site | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
 | `Start-MttRcdInsightsReport.ps1` | [SharePoint-Copilot-Blocked-Sites](./SharePoint-Copilot-Blocked-Sites/) | Tenant | SPO | [Find SharePoint sites with Copilot blocked](https://mstechtalk.com/find-sharepoint-sites-copilot-blocked/) |
 | `Get-MttSiteStorage.ps1` | [SharePoint-Site-and-Tenant-Storage](./SharePoint-Site-and-Tenant-Storage/) | Tenant, Site | SPO | [Find what is filling a SharePoint site](https://mstechtalk.com/how-to-find-what-is-filling-a-sharepoint-site-and-free-up-tenant-storage/) |
