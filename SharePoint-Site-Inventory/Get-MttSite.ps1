@@ -103,7 +103,7 @@ function Get-MttSite {
         No #Requires -Modules line: in PowerShell 7 that line would load the module without
         -UseWindowsPowerShell, so the function checks for it in begin instead.
     .LINK
-        https://github.com/Adnanamin/mstechtalk-powershell-scripts/tree/main/SharePoint-Site-Inventory
+        https://mstechtalk.com/sharepoint-site-inventory-powershell/
     #>
     [CmdletBinding()]
     [OutputType('MSTechTalk.Site')]

@@ -2,6 +2,8 @@
 
 `Get-MttSite` lists every SharePoint site in the tenant in one call, with site type, owner, storage, hub, last change date and, if you ask, external sharing. It returns the sites on the admin center's Active sites page plus Teams channel sites, which that page hides. It is the starting point for tenant-wide reports in the planned **MSTechTalk.M365** module (see [CONVENTIONS.md](../CONVENTIONS.md)): filter its output, or pipe it into another `Mtt` function.
 
+Blog post with scenarios, admin center steps and screenshots: [Build a SharePoint site inventory: admin center and PowerShell](https://mstechtalk.com/sharepoint-site-inventory-powershell/)
+
 | Script | What it does | Changes anything? |
 |---|---|---|
 | `Get-MttSite.ps1` | Report function: one row per site with site type, owner, storage, hub, last change, Teams connection, lock and archive state, and optionally external sharing | No |
