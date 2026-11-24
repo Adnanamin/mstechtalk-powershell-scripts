@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MST - Your first 30 days</title>
+<style>
+  :root{--teal:#0f6e6e;--mint:#e8f5f1;--sand:#fbf5ec;--ink:#1f2a2e;--muted:#5d6b70;--line:#d9e6e2;--accent:#e08a1e}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;color:var(--ink);background:var(--sand);line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 20px 40px}
+  h1{font-size:30px;margin:0 0 6px;color:var(--teal)}
+  .lead{margin:0 0 22px;color:var(--muted);max-width:700px}
+  .progress{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:22px}
+  .bar{height:12px;background:var(--mint);border-radius:999px;overflow:hidden;margin-top:8px}
+  .fill{height:100%;width:0;background:var(--teal);transition:width .3s}
+  .weeks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .week{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+  .week h2{margin:0 0 4px;font-size:17px;color:var(--teal)}
+  .week small{color:var(--muted);display:block;margin-bottom:10px}
+  label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:14px;cursor:pointer}
+  input[type=checkbox]{margin-top:3px;width:16px;height:16px;accent-color:var(--teal)}
+  label.done span{text-decoration:line-through;color:var(--muted)}
+  .contacts{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .contact{background:var(--mint);border-radius:12px;padding:14px 16px}
+  .contact b{display:block;color:var(--teal)}
+  .contact span{font-size:14px;color:var(--muted)}
+  .note{margin-top:22px;font-size:13px;color:var(--muted);border-left:4px solid var(--accent);padding-left:12px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>Your first 30 days at MST</h1>
+  <p class="lead">Welcome to Meridian Summit Technologies. Use this checklist with your manager during your first month. Ticks are only for this visit: they reset when you reload the page.</p>
+
+  <section class="progress" aria-live="polite">
+    <strong id="count">0 of 0 done</strong>
+    <div class="bar" aria-hidden="true"><div class="fill" id="fill"></div></div>
+  </section>
+
+  <section class="weeks">
+    <div class="week"><h2>Day 1</h2><small>Get set up</small>
+      <label><input type="checkbox"><span>Collect your laptop and badge from reception</span></label>
+      <label><input type="checkbox"><span>Sign in and register the Authenticator app</span></label>
+      <label><input type="checkbox"><span>Join your team in Microsoft Teams</span></label>
+      <label><input type="checkbox"><span>Read the Code of Conduct on the intranet</span></label>
+    </div>
+    <div class="week"><h2>Week 1</h2><small>Learn how we work</small>
+      <label><input type="checkbox"><span>Meet your onboarding buddy</span></label>
+      <label><input type="checkbox"><span>Complete the information security course</span></label>
+      <label><input type="checkbox"><span>Check your details in the Employee Directory</span></label>
+      <label><input type="checkbox"><span>Book your first one-to-one with your manager</span></label>
+    </div>
+    <div class="week"><h2>Weeks 2 - 3</h2><small>Get to know the business</small>
+      <label><input type="checkbox"><span>Shadow a project stand-up with the PMO</span></label>
+      <label><input type="checkbox"><span>Read the leave and expenses policies</span></label>
+      <label><input type="checkbox"><span>Submit a test expense claim with your manager</span></label>
+    </div>
+    <div class="week"><h2>Week 4</h2><small>Settle in</small>
+      <label><input type="checkbox"><span>Agree your 90-day objectives</span></label>
+      <label><input type="checkbox"><span>Give feedback on your onboarding to HR</span></label>
+      <label><input type="checkbox"><span>Finish any training still open in the Training Register</span></label>
+    </div>
+  </section>
+
+  <section class="contacts" aria-label="Who to ask">
+    <div class="contact"><b>Human Resources</b><span>Contracts, leave, payroll questions</span></div>
+    <div class="contact"><b>IT Service Desk</b><span>Laptop, accounts, access, software</span></div>
+    <div class="contact"><b>Your buddy</b><span>Everything else, especially "where is..."</span></div>
+  </section>
+
+  <p class="note">Sample page built for MSTechTalk.com on a demo tenant. Meridian Summit Technologies is a fictional company.</p>
+</main>
+<script>
+  // Progress counter. State lives in memory only: the SharePoint sandbox can't use localStorage.
+  const boxes = Array.from(document.querySelectorAll('input[type=checkbox]'));
+  function update(){
+    const done = boxes.filter(b => b.checked).length;
+    document.getElementById('count').textContent = done + ' of ' + boxes.length + ' done';
+    document.getElementById('fill').style.width = (done / boxes.length * 100) + '%';
+    boxes.forEach(b => b.parentElement.classList.toggle('done', b.checked));
+  }
+  boxes.forEach(b => b.addEventListener('change', update));
+  update();
+</script>
+</body>
+</html>

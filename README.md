@@ -131,6 +131,15 @@ Tools for reading SharePoint lists over the 5,000-item list view threshold.
 - **Requirements:** PowerShell 7.4 or later, PnP.PowerShell 3.x and your own Entra app registration.
 - **Documentation:** [SharePoint Large Lists](./SharePoint-Large-Lists/README.md)
 
+### SharePoint HTML Pages
+
+Sample HTML pages you can upload to the Site Pages library of a SharePoint site with HTML pages enabled.
+
+- **Files:** `mst-it-service-desk-help.html` and `mst-new-starter-first-30-days.html` (no PowerShell yet; the reporting functions come with the admin post)
+- **Features:** Single-file pages with inline CSS and JavaScript that work inside SharePoint's sandboxed HTML page frame.
+- **Requirements:** A SharePoint site where HTML pages are enabled and HTML files are allowed in Site Pages.
+- **Documentation:** [SharePoint HTML Pages](./SharePoint-HTML-Pages/README.md)
+
 ### Microsoft Graph sharedWithMe Retirement
 
 Tools for moving off the Graph file endpoints that stop returning data after November 2026.
